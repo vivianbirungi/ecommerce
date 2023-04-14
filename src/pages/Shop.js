@@ -19,6 +19,10 @@ function Shop() {
   const openModal = () => {
     setShowModal(true);
   };
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+  };
   return (
     <>
       <NavTop onClick={openModal} />
@@ -33,17 +37,14 @@ function Shop() {
         </Row>
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>My Cart</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Cart data={cart} />
+            <Cart data={cart} removeItem={removeFromCart} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
             </Button>
           </Modal.Footer>
         </Modal>

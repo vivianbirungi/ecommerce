@@ -1,8 +1,11 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-
-export default function CartItem({ data }) {
+import Button from "react-bootstrap/Button";
+export default function CartItem({ data, removeItem }) {
   const { id, productImage, price, productName, category } = data;
+  const removeFromCart = () => {
+    removeItem(id);
+  };
   return (
     <div>
       <Row>
@@ -16,6 +19,7 @@ export default function CartItem({ data }) {
         </Col>
         <Col>{price}</Col>
       </Row>
+      <Button onClick={removeFromCart}>Remove Item</Button>
     </div>
   );
 }
