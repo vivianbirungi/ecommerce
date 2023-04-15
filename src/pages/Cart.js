@@ -10,7 +10,7 @@ function Cart({ data, removeItem }) {
       <p>{JSON.stringify(cartItems)}</p>
       {Products.map((item) => {
         if (cartItems[item.id] !== 0) {
-          return <CartItem data={item} removeItem={removeItem} />;
+          return <CartItem data={item} />;
         }
       })}
     </Container>

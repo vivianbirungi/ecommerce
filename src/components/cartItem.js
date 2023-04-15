@@ -1,25 +1,33 @@
-import React from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { useContext } from "react";
+import { Card, Col, Row, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-export default function CartItem({ data, removeItem }) {
+import { ShopContext } from "../context/ShopContext";
+
+export default function CartItem({ data }) {
   const { id, productImage, price, productName, category } = data;
-  const removeFromCart = () => {
-    removeItem(id);
-  };
+  const { cartItems, removeItemFromCart, addToCart, addItemsToCart } =
+    useContext(ShopContext);
+  const itemsQuantity = cartItems[id];
   return (
-    <div>
+    <Card>
       <Row>
         <Col>
           {/* //image */}
-          <img src={productImage} width={50} height={50} />
+          <img src={productImage} width={200} height={150} />
         </Col>
         <Col>
+          {" "}
           <p>{productName}</p>
           <p>{category}</p>
+          <Button onClick={() => removeItemFromCart(id)}>-</Button>
+          <input
+            type="text"
+            value={cartItems[id]}
+            onChange={(e) => addItemsToCart(e.target.value, id)}
+          />
+          <Button onClick={() => addToCart(id)}>+ </Button>
         </Col>
-        <Col>{price}</Col>
       </Row>
-      <Button onClick={removeFromCart}>Remove Item</Button>
-    </div>
+    </Card>
   );
 }
